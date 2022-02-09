@@ -102,7 +102,6 @@ pipeline {
         }
     }
 }
-//
 //ssh -tt -o StrictHostKeyChecking=no ubuntu@\${tomcat_prd}; sudo systemctl stop tomcat; sudo rm -rf /opt/tomcat/webapps/petclinic*;exit
 // stage("Run Unit-Tests"){
         //     steps {
