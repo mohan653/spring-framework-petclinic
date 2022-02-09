@@ -7,6 +7,21 @@ pipeline {
         tomcat_uat = "ec2-13-234-34-51.ap-south-1.compute.amazonaws.com"
         tomcat_prd = "ec2-3-109-139-179.ap-south-1.compute.amazonaws.com"
     }
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+            [key: 'ref', value: '$.ref']
+            ],
+            causeString: 'Triggered on $ref',
+            token: 'abc123',
+            tokenCredentialId: '',
+            printContributedVariables: true,
+            printPostContent: true,
+            silentResponse: false,
+            regexpFilterText: '$ref',
+            //regexpFilterExpression: 'refs/heads/' + BRANCH_NAME
+        )
+    }
     stages{  
         stage("Build Source Code"){
             steps {
