@@ -19,7 +19,7 @@ pipeline {
             printPostContent: true,
             silentResponse: false,
             regexpFilterText: '$ref',
-            regexpFilterExpression: 'refs/heads/' + GIT_BRANCH
+         //   regexpFilterExpression: 'refs/heads/' + GIT_BRANCH
         )
     }
     stages{  
