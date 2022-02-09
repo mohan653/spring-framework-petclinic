@@ -59,23 +59,22 @@ pipeline {
                             }
                         ]
                     }''',
-                )
-                    
+                )  
             }
         }            
         stage("RenameArtifacts"){
             steps {
                 sh """
-                     mv target/*.war target/petclinicApp.war
+                    mv target/*.war target/petclinicApp.war
                 """
             }
         }
         stage("deploy-aws-dev"){
             steps{
                 sshagent(['aws-ec2-creds']) {
-                        sh """
-                            scp  -r -o StrictHostKeyChecking=no target/*.war   ubuntu@\${tomcat_dev}:/opt/tomcat/webapps
-                        """
+                    sh """
+                        scp  -r -o StrictHostKeyChecking=no target/*.war   ubuntu@\${tomcat_dev}:/opt/tomcat/webapps
+                    """
                 }
             }
         }
