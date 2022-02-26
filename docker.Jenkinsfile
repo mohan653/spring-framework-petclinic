@@ -10,12 +10,13 @@ pipeline {
       }
       steps {
         sh 'mvn clean install'
+        sh 'ls -lrt target/*'
       }
     }
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t vsiraparapu/petclinicApp:latest .'
+        sh 'docker build -t vsiraparapu/petclinicapp:latest .'
       }
     }
     // stage('Docker Push') {
