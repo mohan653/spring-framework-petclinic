@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+    // agent any
+    agent {
+        label 'linux-ubuntu'
+    }
     environment {
         git_repo_url = "https://github.com/crazy4devops/spring-framework-petclinic.git"
         git_repo_br = "dev"
@@ -8,6 +11,7 @@ pipeline {
         tomcat_prd = "ec2-3-109-139-179.ap-south-1.compute.amazonaws.com"
     }
     triggers {
+        cron '* * * * *'
         GenericTrigger(
             genericVariables: [
             [key: 'ref', value: '$.ref']
@@ -24,6 +28,12 @@ pipeline {
     }
     stages{  
         stage("Build Source Code"){
+            agent {
+                
+            }
+            environment {
+
+            }
             steps {
                    
                     sh "./mvnw package"
@@ -31,6 +41,7 @@ pipeline {
             }
         }
         stage('Code Analysis') {
+            
             environment {
               def scannerHome = tool 'SonarQubeScanner'
             }
