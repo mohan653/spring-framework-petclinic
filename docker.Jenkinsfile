@@ -1,7 +1,7 @@
 pipeline {
   agent none
   stages {
-    stage('Maven Install') {
+    stage('Build App') {
       agent {
         docker {
           image 'maven:3.5.0'
@@ -10,15 +10,14 @@ pipeline {
       }
       steps {
         sh 'mvn clean install'
-        sh 'ls -lrt target/*'
       }
     }
-    // stage('Docker Build') {
-    //   agent any
-    //   steps {
-    //     sh 'docker build -t shanem/spring-petclinic:latest .'
-    //   }
-    // }
+    stage('Docker Build') {
+      agent any
+      steps {
+        sh 'docker build -t vsiraparapu/petclinicApp:latest .'
+      }
+    }
     // stage('Docker Push') {
     //   agent any
     //   steps {
